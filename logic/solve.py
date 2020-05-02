@@ -13,8 +13,8 @@ def validate_row(data: np.ndarray):
         print("Row " + str(i))
         print(get_row(data, i))        
 
-    for i in range(9):
-        get_grid(data, (0))
+    for i in range(1, 10):
+        get_grid(data, (i))
 
 def get_column(data: np.ndarray, index) -> np.ndarray:
     return data[:, index]
