@@ -4,9 +4,6 @@ import grid_logic as grid
 
 
 def process(data: np.ndarray) -> np.ndarray:
-    # print("Process started...")
-    # print("Previous array -")
-    # print(data)
 
     while True:
         is_data_updated = False
@@ -19,11 +16,7 @@ def process(data: np.ndarray) -> np.ndarray:
                         is_data_updated = True
 
         if not is_data_updated:
-            # print("Processed array -")
-            # print(data)
             break
-
-    # print("Process finished")
     return data
 
 
