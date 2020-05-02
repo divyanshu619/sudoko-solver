@@ -1,11 +1,12 @@
 import numpy as np
+
 import grid_logic as grid
 import step_first as step
 
 
 def generate_solution(input_data: np.ndarray) -> np.ndarray:
     # code for generating solution string
-    return input_data
+    return step.process(input_data)
 
 
 def validate_row(data: np.ndarray):
@@ -20,11 +21,9 @@ def validate_row(data: np.ndarray):
 
     for i in range(0, 9):
         for j in range(0, 9):
-            print(grid.get_grid_number(i, j), end = "")
+            print(grid.get_grid_number(i, j), end="")
         print()
-    
-    step.process(data)
-    
+
 
 def get_column(data: np.ndarray, index) -> np.ndarray:
     return data[:, index]
@@ -32,7 +31,6 @@ def get_column(data: np.ndarray, index) -> np.ndarray:
 
 def get_row(data: np.ndarray, index) -> np.ndarray:
     return data[index, :]
-
 
 # def get_remaining_digits(data: np.ndarray) -> :
 #

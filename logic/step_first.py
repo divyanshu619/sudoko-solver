@@ -1,11 +1,12 @@
 import numpy as np
+
 import grid_logic as grid
 
 
-def process(data: np.ndarray):
-    print("Process started...")
-    print("Previous array -")
-    print(data)    
+def process(data: np.ndarray) -> np.ndarray:
+    # print("Process started...")
+    # print("Previous array -")
+    # print(data)
 
     while True:
         is_data_updated = False
@@ -18,11 +19,12 @@ def process(data: np.ndarray):
                         is_data_updated = True
 
         if not is_data_updated:
-            print("Processed array -")
-            print(data)
-            break  
+            # print("Processed array -")
+            # print(data)
+            break
 
-    print("Process finished")
+    # print("Process finished")
+    return data
 
 
 def get_missing_numbers(data, row, col) -> np.ndarray:
