@@ -1,10 +1,10 @@
 import numpy as np
 
 
-def read_data() -> (np.ndarray, np.ndarray):
-    quizzes: np.ndarray = np.zeros((10, 81), np.int32)
-    solutions: np.ndarray = np.zeros((10, 81), np.int32)
-    for i, line in enumerate(open('sudoku-small.csv', 'r').read().splitlines()[1:]):
+def read_data(number_of_entries, filename) -> (np.ndarray, np.ndarray):
+    quizzes = np.zeros((number_of_entries, 81), np.int32)
+    solutions = np.zeros((number_of_entries, 81), np.int32)
+    for i, line in enumerate(open(filename, 'r').read().splitlines()[1:]):
         quiz, solution = line.split(",")
         for j, q_s in enumerate(zip(quiz, solution)):
             q, s = q_s
