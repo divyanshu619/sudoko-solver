@@ -15,8 +15,13 @@ def solve_from_input_string(input_string: str):
     solved = solve.generate_solution(quiz)
     completion_time = datetime.utcnow()
     time_delta: timedelta = (completion_time - start_time)
-    print("Average time to solve : " + str(time_delta.total_seconds() * 1000) + " ms")
-    print(solved)
+    result = solve.verify_solution(solved)
+    if result:
+        print("Solution generated successfully")
+        print("Average time to solve : " + str(time_delta.total_seconds() * 1000) + " ms")
+        print(solved)
+    else:
+        print("Could not generate solution")
 
 
 def run_tests_from_data_set():
@@ -67,11 +72,12 @@ def run_tests_from_data_set():
 # Defining main function
 def main():
     # input_string = '068700900004000071030809050300080100040005007007304092602001005000020600059030028'
+
     # expert
     # input_string = '080000000003900000901003002000032004307000000000064800000000090500040600260800500'
-
     # hard
     input_string = '100304809024000007000960500230000050507008000000000400009500000300800000050600030'
+
     solve_from_input_string(input_string)
     # run_tests_from_data_set()
 
