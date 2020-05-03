@@ -1,7 +1,6 @@
 from typing import Dict, List, Tuple
 
 import numpy as np
-from numpy.core._multiarray_umath import ndarray
 
 import common_logic as logic
 
@@ -46,7 +45,7 @@ def update_values_row_wise(data: np.ndarray, missing_number_grid: np.ndarray) ->
     should_continue_processing = False
     for i in range(9):
         number_occurrences_index_list: Dict[int, List[Tuple[int, int]]] = {}
-        row_data: ndarray = logic.get_row(missing_number_grid, i)
+        row_data: np.ndarray = logic.get_row(missing_number_grid, i)
         for j in range(9):
             cell = row_data[j]
             if cell is not None:
@@ -72,7 +71,7 @@ def update_values_column_wise(data: np.ndarray, missing_number_grid: np.ndarray)
     should_continue_processing = False
     for i in range(9):
         number_occurrences_index_list: Dict[int, List[Tuple[int, int]]] = {}
-        col_data: ndarray = logic.get_column(missing_number_grid, i)
+        col_data: np.ndarray = logic.get_column(missing_number_grid, i)
         for j in range(9):
             cell = col_data[j]
             if cell is not None:
