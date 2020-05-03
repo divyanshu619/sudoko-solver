@@ -3,7 +3,7 @@ import numpy as np
 import pytesseract
 
 # Read image from which text needs to be extracted
-img = cv2.imread("image2.png")
+img = cv2.imread("image5.png")
 
 # Preprocessing the image starts
 
@@ -62,7 +62,7 @@ sudoku_string = ''
 # Then rectangular part is cropped and passed on
 # to pytesseract for extracting text from it
 # Extracted text is then written into the text file
-for cnt in contours:
+for i, cnt in enumerate(contours):
     x, y, w, h = cv2.boundingRect(cnt)
 
     # Drawing a rectangle on copied image
@@ -70,6 +70,7 @@ for cnt in contours:
 
     # Cropping the text block for giving input to OCR
     cropped = im2[y + 5:y + h - 5, x + 5:x + w - 5]
+    # cv2.imwrite(str(i) + ".png", cropped)
     # cv2.imshow("original", rect)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
