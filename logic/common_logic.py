@@ -3,6 +3,14 @@ from typing import List
 import numpy as np
 
 
+def get_column(data: np.ndarray, index) -> np.ndarray:
+    return data[:, index]
+
+
+def get_row(data: np.ndarray, index) -> np.ndarray:
+    return data[index, :]
+
+
 def get_grid_content_by_index(data, row, col) -> np.array:
     grid_number = get_grid_number(row, col)
     return get_grid_content(data, grid_number)

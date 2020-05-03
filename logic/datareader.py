@@ -1,7 +1,10 @@
 import numpy as np
 
-number_of_entries = 1
-filename = 'sudoku-fail-test.csv'
+# number_of_entries = 1
+# filename = 'sudoku-fail-test.csv'
+
+number_of_entries = 10
+filename = 'sudoku-small.csv'
 
 
 def read_data() -> (np.ndarray, np.ndarray):

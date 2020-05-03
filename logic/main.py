@@ -3,9 +3,6 @@ import solve
 
 data = datareader.read_data()
 
-# y = solve.generate_solution(data[0][0])
-# print(y)
-
 correct_solutions = 0
 incorrect_solutions = 0
 index = 0
