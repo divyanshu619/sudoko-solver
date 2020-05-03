@@ -21,7 +21,8 @@ def process(data: np.ndarray) -> np.ndarray:
                         is_data_updated = True
         should_continue_row = update_values_row_wise(data, missing_number_grid)
         should_continue_column = update_values_column_wise(data, missing_number_grid)
-        if not (should_continue_row or should_continue_column or is_data_updated):
+        should_continue_sub_grid = update_values_sub_grid(data, missing_number_grid)
+        if not (should_continue_row or should_continue_column or should_continue_sub_grid or is_data_updated):
             break
     # print(missing_number_grid)
     return data
@@ -90,4 +91,32 @@ def update_values_column_wise(data: np.ndarray, missing_number_grid: np.ndarray)
                 j = v[0][1]
                 data[i, j] = k
                 # print("[COLUMN] Updated value at position : " + str(v[0]) + " to : " + str(k))
+    return should_continue_processing
+
+
+def update_values_sub_grid(data: np.ndarray, missing_number_grid: np.ndarray) -> bool:
+    should_continue_processing = False
+
+    for a in range(3):
+        for b in range(3):
+            number_occurrences_index_list: Dict[int, List[Tuple[int, int]]] = {}
+            for c in range(3):
+                for d in range(3):
+                    x = c + (3 * a)
+                    y = d + (3 * b)
+                    cell = missing_number_grid[x, y]
+                    if cell is not None:
+                        for num in cell:
+                            if num in number_occurrences_index_list.keys():
+                                number_occurrences_index_list[num].append((x, y))
+                            else:
+                                number_occurrences_index_list[num] = [(x, y)]
+            for k, v in number_occurrences_index_list.items():
+                if len(v) == 1:
+                    should_continue_processing = True
+                    i = v[0][0]
+                    j = v[0][1]
+                    data[i, j] = k
+                    # print("[SUB_GRID] Updated value at position : " + str(v[0]) + " to : " + str(k))
+
     return should_continue_processing
