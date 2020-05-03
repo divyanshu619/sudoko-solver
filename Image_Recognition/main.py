@@ -1,9 +1,9 @@
 import cv2
-import pytesseract
 import numpy as np
+import pytesseract
 
 # Read image from which text needs to be extracted
-img = cv2.imread("download.jpg")
+img = cv2.imread("image2.png")
 
 # Preprocessing the image starts
 
@@ -20,7 +20,7 @@ thresh2 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.T
 # of the rectangle to be detected.
 # A smaller value like (10, 10) will detect
 # each word instead of a sentence.
-kernel_len = np.array(img).shape[1]//12
+kernel_len = np.array(img).shape[1] // 12
 ver_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, kernel_len))
 hor_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (kernel_len, 1))
 
@@ -33,7 +33,6 @@ image_1 = cv2.erode(thresh2, hor_kernel, iterations=1)
 horizontal_lines = cv2.dilate(image_1, hor_kernel, iterations=6)
 
 img_vh = cv2.addWeighted(vertical_lines, 0.5, horizontal_lines, 0.5, 0.0)
-
 
 # Appplying dilation on the threshold image
 
@@ -51,7 +50,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 # Creating a copy of image
 im2 = img.copy()
-
 
 # A text file is created and flushed
 file = open("recognized.txt", "w+")
@@ -78,7 +76,8 @@ for cnt in contours:
     file = open("recognized.txt", "a")
 
     # Apply OCR on the cropped image
-    text = pytesseract.image_to_string(cropped,'eng',config='--oem 1  --psm 10 outputbase digits')
+    custom_oem_psm_config = r'--oem 3 --psm 10 digits'
+    text = pytesseract.image_to_string(cropped, 'eng', config=custom_oem_psm_config)
 
     # Appending the text into file
     file.write(text)
