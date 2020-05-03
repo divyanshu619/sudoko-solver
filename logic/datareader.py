@@ -1,16 +1,7 @@
 import numpy as np
 
-# number_of_entries = 1
-# filename = 'sudoku-fail-test.csv'
 
-# number_of_entries = 10
-# filename = 'sudoku-small.csv'
-
-number_of_entries = 5000
-filename = 'sudoku-5k.csv'
-
-
-def read_data() -> (np.ndarray, np.ndarray):
+def read_data(number_of_entries, filename) -> (np.ndarray, np.ndarray):
     quizzes = np.zeros((number_of_entries, 81), np.int32)
     solutions = np.zeros((number_of_entries, 81), np.int32)
     for i, line in enumerate(open(filename, 'r').read().splitlines()[1:]):
