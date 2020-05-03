@@ -45,9 +45,9 @@ img_vh = cv2.addWeighted(vertical_lines, 0.5, horizontal_lines, 0.5, 0.0)
 contours, hierarchy = cv2.findContours(img_vh, cv2.RETR_TREE,
                                        cv2.CHAIN_APPROX_SIMPLE)
 
-cv2.imshow("original", img_vh)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow("original", img_vh)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 # Creating a copy of image
 im2 = img.copy()
 
@@ -55,6 +55,8 @@ im2 = img.copy()
 file = open("recognized.txt", "w+")
 file.write("")
 file.close()
+
+sudoku_string = ''
 
 # Looping through the identified contours
 # Then rectangular part is cropped and passed on
@@ -64,13 +66,13 @@ for cnt in contours:
     x, y, w, h = cv2.boundingRect(cnt)
 
     # Drawing a rectangle on copied image
-    rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    # rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     # Cropping the text block for giving input to OCR
-    cropped = im2[y:y + h, x:x + w]
-    cv2.imshow("original", rect)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cropped = im2[y + 5:y + h - 5, x + 5:x + w - 5]
+    # cv2.imshow("original", rect)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     # Open the file in append mode
     file = open("recognized.txt", "a")
@@ -78,10 +80,20 @@ for cnt in contours:
     # Apply OCR on the cropped image
     custom_oem_psm_config = r'--oem 3 --psm 10 digits'
     text = pytesseract.image_to_string(cropped, 'eng', config=custom_oem_psm_config)
+    # print("-----------")
+    # print(text)
 
-    # Appending the text into file
-    file.write(text)
-    file.write("\n")
+    if (text.isdigit()):
+        sudoku_string += text
+    else:
+        sudoku_string += '0'
 
-    # Close the file
-    file.close()
+    # # Appending the text into file
+    # file.write(text)
+    # file.write("\n")
+    #
+    # # Close the file
+    # file.close()
+sudoku_string = "".join(reversed(sudoku_string))
+sudoku_string = sudoku_string[:-1]
+print(sudoku_string)
